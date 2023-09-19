@@ -20,17 +20,22 @@ UdpServer::UdpServer(QWidget *parent) noexcept : QWidget(parent)
     connect(m_QSlider, &QSlider::valueChanged, this, [this](int value){m_HeightLabel->setText(QString("Height: %1").arg(m_Height = value));});
 
     m_Socket = new QUdpSocket(this);
-    m_Socket->bind( m_IpAddress, m_Port);
+
+    if(!m_Socket->bind( m_IpAddress, m_Port))
+        throw std::runtime_error("Server's bind is failed");
+
     connect(m_Socket, SIGNAL(readyRead()), this, SLOT(ReceiveClientActivity()));
 
     m_QTimer = new QTimer(this);
-    m_QTimer->setInterval(40);//1000ms / 25hz = 40ms
+    m_QTimer->setInterval(40); //1000ms / 25hz = 40ms
     connect(m_QTimer, SIGNAL(timeout()), this, SLOT(SendHeight()));
     m_QTimer->start();
 
-    m_BoxLayout->addWidget(m_QSlider);
-    m_BoxLayout->addWidget(m_HeightLabel);
     m_BoxLayout->addWidget(m_ConnectionLabel);
+    m_BoxLayout->addWidget(m_HeightLabel);
+    m_BoxLayout->addWidget(m_QSlider);
+    m_BoxLayout->addStretch();
+    m_BoxLayout->setAlignment(Qt::AlignCenter);
 
     setLayout(m_BoxLayout);
 }

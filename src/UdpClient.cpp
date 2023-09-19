@@ -60,16 +60,7 @@ void UdpClient::ReceiveHeight()
 {
     while(m_Socket->hasPendingDatagrams())
     {
-        //Make code as dry as Sahara!
-        auto show_message = [](const Message1 &message, bool broken = false)
-        {
-            broken ? qDebug() << "Client got a broken message" : qDebug() << "Client got a new message";
-            qDebug() << "Message:";
-            qDebug() << "Header: " << message.header;
-            qDebug() << "Height: " << message.height;
-        };
-
-        QByteArray datagram;
+       QByteArray datagram;
         Message1 message;
 
         datagram.resize(m_Socket->pendingDatagramSize());
@@ -83,15 +74,9 @@ void UdpClient::ReceiveHeight()
         stream >> message.header;
 
         if (message.header != 0xABCD)
-        {
-            show_message(message, true);
-            return;
-        }
 
         //Read height if message is not broken
         stream >> message.height;
-
-        show_message(message);
 
         m_HeightIndicatorWidget->SetHeight(message.height);
         m_HeightLabel->setText(QString("Height: %1").arg(message.height));
@@ -103,7 +88,6 @@ void UdpClient::ReceiveHeight()
 void UdpClient::ReadIniFile()
 {
     QSettings settings("../settings.ini", QSettings::IniFormat);
-
 
     settings.beginGroup("NETWORK_CLIENT");
 
@@ -126,6 +110,4 @@ void UdpClient::ReadIniFile()
     m_PortServer = settings.value("Port").toInt();
 
     settings.endGroup();
-
-
 }

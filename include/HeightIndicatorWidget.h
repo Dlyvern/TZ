@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QtMath>
 #include <cmath>
 
 class HeightIndicatorWidget : public QWidget
