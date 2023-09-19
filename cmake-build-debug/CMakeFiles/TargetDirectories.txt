@@ -1,0 +1,5 @@
+/home/dlyvern/Projects/TZ/cmake-build-debug/CMakeFiles/TZ.dir
+/home/dlyvern/Projects/TZ/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/dlyvern/Projects/TZ/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/dlyvern/Projects/TZ/cmake-build-debug/CMakeFiles/TZ_autogen_timestamp_deps.dir
+/home/dlyvern/Projects/TZ/cmake-build-debug/CMakeFiles/TZ_autogen.dir

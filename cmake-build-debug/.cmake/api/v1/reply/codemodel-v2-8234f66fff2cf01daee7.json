@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "TZ",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "TZ::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TZ-Debug-27cb370462534cca4b42.json",
+					"name" : "TZ",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TZ_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TZ_autogen-Debug-a5a5e77c4fc6f4c3afb9.json",
+					"name" : "TZ_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TZ_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TZ_autogen_timestamp_deps-Debug-54b5f9615ceb5576e8eb.json",
+					"name" : "TZ_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/dlyvern/Projects/TZ/cmake-build-debug",
+		"source" : "/home/dlyvern/Projects/TZ"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}
