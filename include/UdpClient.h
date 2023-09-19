@@ -24,10 +24,11 @@ private:
     HeightIndicatorWidget *m_HeightIndicatorWidget{nullptr};
     bool m_IsConnected{false};
 
+    QHostAddress m_IpAddress{QHostAddress::Null};
     qint16 m_Port{0};
-    QHostAddress m_IpAddress;
 
-
+    QHostAddress m_IpAddressServer{QHostAddress::Null};
+    qint16 m_PortServer{0};
 
     void ReadIniFile();
 

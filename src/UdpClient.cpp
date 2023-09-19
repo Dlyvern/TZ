@@ -7,7 +7,7 @@ UdpClient::UdpClient(QWidget *parent)noexcept : QWidget(parent)
     setWindowTitle("Udp client");
 
     m_Socket = new QUdpSocket(this);
-    m_Socket->bind(m_Port);
+    m_Socket->bind(m_IpAddress, m_Port);
 
     QFont font_labels;
     font_labels.setPointSize(16);
@@ -48,7 +48,7 @@ void UdpClient::SendActivity()
     QDataStream stream(&datagram, QIODevice::WriteOnly);
     stream << message.header;
 
-    m_Socket->writeDatagram(datagram, QHostAddress{m_IpAddress}, m_Port);
+    m_Socket->writeDatagram(datagram, QHostAddress{m_IpAddressServer}, m_PortServer);
 
     if(!m_IsConnected)
         m_ConnectionLabel->setText(QString{"Connection: Disconnected"});
@@ -73,6 +73,7 @@ void UdpClient::ReceiveHeight()
         Message1 message;
 
         datagram.resize(m_Socket->pendingDatagramSize());
+
         m_Socket->readDatagram(datagram.data(), datagram.size());
 
         QDataStream stream(datagram);
@@ -103,25 +104,28 @@ void UdpClient::ReadIniFile()
 {
     QSettings settings("../settings.ini", QSettings::IniFormat);
 
+
+    settings.beginGroup("NETWORK_CLIENT");
+
     if (settings.status() != QSettings::NoError)
-    {
-        settings.setValue("clientAddress", "127.0.0.1");
-        settings.setValue("clientPort", 8080);
-    }
+        throw std::runtime_error("Could not read settings.ini");
 
-    settings.beginGroup("NETWORK");
-
-    QString address_in_string = settings.value("IpAddress").toString();
-
-    if(address_in_string.isEmpty() || address_in_string.isNull())
-        address_in_string = settings.value("clientAddress", "127.0.0.1").toString();
-
-    m_IpAddress.setAddress(address_in_string);
+    m_IpAddress.setAddress(QString{settings.value("IpAddress").toString()});
 
     m_Port = settings.value("Port").toInt();
 
-    if(m_Port == 0 || m_Port < 0)
-        m_Port = settings.value("clientPort", 8080).toInt();
+    settings.endGroup();
+
+    if (settings.status() != QSettings::NoError)
+        throw std::runtime_error("Could not read settings.ini");
+
+    settings.beginGroup("NETWORK_SERVER");
+
+    m_IpAddressServer.setAddress(QString{settings.value("IpAddress").toString()});
+
+    m_PortServer = settings.value("Port").toInt();
 
     settings.endGroup();
+
+
 }

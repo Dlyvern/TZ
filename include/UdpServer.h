@@ -22,8 +22,13 @@ private:
     QLabel* m_ConnectionLabel{nullptr};
     QLabel* m_HeightLabel{nullptr};
     QSlider* m_QSlider{nullptr};
+
     QHostAddress m_IpAddress{QHostAddress::Null};
     qint16 m_Port{0};
+
+    QHostAddress m_IpAddressClient{QHostAddress::Null};
+    qint16 m_PortClient{0};
+
     quint16 m_Height{0};
     std::chrono::seconds m_ClientTimeOut{std::chrono::seconds(2)};
 
