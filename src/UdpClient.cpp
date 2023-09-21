@@ -111,3 +111,13 @@ void UdpClient::ReadIniFile()
 
     settings.endGroup();
 }
+
+UdpClient::~UdpClient()
+{
+    delete(m_Socket);
+    delete(m_ActivityTimer);
+    delete(m_ConnectionLabel);
+    delete(m_HeightLabel);
+    delete(m_BoxLayout);
+    delete(m_HeightIndicatorWidget);
+}
