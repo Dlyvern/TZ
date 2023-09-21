@@ -40,6 +40,8 @@ private slots:
 public:
 
     explicit UdpClient(QWidget *parent = nullptr) noexcept;
+
+    ~UdpClient() override;
 };
 
 #endif //UDP_CLIENT_H
